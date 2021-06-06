@@ -11,7 +11,7 @@ export default ({ state, descriptors, navigation, position }) => {
     const focused_route = state.routes[state.index];
 
     return (
-        <View style={{position: "absolute", zIndex: 2, justifyContent: "center", width: "100%", marginTop: 75, flexDirection: "row"}}>
+        <View style={{position: "absolute", zIndex: 2, justifyContent: "center", width: "100%", marginTop: 90, flexDirection: "row"}}>
             {state.routes.map((route, index) => {
             // const { options } = descriptors[route.key];
             // const label =
@@ -48,7 +48,7 @@ export default ({ state, descriptors, navigation, position }) => {
                 outputRange: inputRange.map(i => (i === index ? 1 : 0)),
             });
 
-            if(focused_route.name === "Main"){
+            if(focused_route.name === "Shazam"){
                 const routeName = getFocusedRouteNameFromRoute(focused_route);
 
                 if(routeName === "Listening"){

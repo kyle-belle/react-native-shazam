@@ -3,6 +3,7 @@ import {StyleSheet, Dimensions} from "react-native";
 const {width, height} = Dimensions.get("window");
 
 const SHAZAM_BUTTON_SIZE = width * 0.5;
+const LISTENING_SHAZAM_BUTTON_SIZE = SHAZAM_BUTTON_SIZE * 0.6;
 const SEARCH_BUTTON_SIZE = width * 0.13;
 const TAB_INDICATOR_SIZE = 8;
 
@@ -33,6 +34,11 @@ export const Styles = StyleSheet.create({
         borderRadius: SHAZAM_BUTTON_SIZE,
         backgroundColor: "white",
     },
+    listening_shazam_button_background: {
+        width: LISTENING_SHAZAM_BUTTON_SIZE,
+        height: LISTENING_SHAZAM_BUTTON_SIZE,
+        borderRadius: LISTENING_SHAZAM_BUTTON_SIZE,
+    },
     shazam_button_container: {
         position: "relative",
         marginBottom: 100
@@ -44,6 +50,13 @@ export const Styles = StyleSheet.create({
         height: SEARCH_BUTTON_SIZE,
         borderRadius: SEARCH_BUTTON_SIZE,
         backgroundColor: "white"
+    },
+    shazam_button_hole: {
+        position: "absolute",
+        width: SHAZAM_BUTTON_SIZE * 0.9,
+        height: SHAZAM_BUTTON_SIZE * 0.9,
+        borderRadius: SHAZAM_BUTTON_SIZE * 0.9,
+        backgroundColor: "rgba(0,0,0,0)"
     },
     search_button_container: {
         position: "relative",

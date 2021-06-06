@@ -12,12 +12,12 @@ const Tab = createMaterialTopTabNavigator();
 
 const HomeNavigator = ({listening}) => {
 
-    console.log("listening", listening);
+    // console.log("listening", listening);
 
     return (
-        <Tab.Navigator initialRouteName="Main" swipeEnabled={!listening} tabBar={props => <HomeTabBar {...props} />}>
+        <Tab.Navigator initialRouteName="Shazam" swipeEnabled={!listening} tabBar={props => <HomeTabBar {...props} />}>
             <Tab.Screen name="Library" component={Home} />
-            <Tab.Screen name="Main" component={ShazamNav} />
+            <Tab.Screen name="Shazam" component={ShazamNav} />
             <Tab.Screen name="Charts" component={Home} />
         </Tab.Navigator>
     );

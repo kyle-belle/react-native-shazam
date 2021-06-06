@@ -1,3 +1,4 @@
+import { createStackNavigator } from '@react-navigation/stack';
 import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import {createSharedElementStackNavigator} from "react-navigation-shared-element";
@@ -5,7 +6,7 @@ import {createSharedElementStackNavigator} from "react-navigation-shared-element
 import Home from '../../Screens/Home';
 import Listening from '../../Screens/Listening';
 
-const Stack = createSharedElementStackNavigator();
+const Stack = createStackNavigator();
 
 export default () => {
 

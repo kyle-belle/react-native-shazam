@@ -15,6 +15,11 @@ import {Provider} from "react-redux";
 import Reducers from "./src/Reducers";
 
 import HomeNav from "./src/Navigators/HomeNavigator";
+import { enableScreens } from 'react-native-screens';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+import ShazamNavigator from './src/Navigators/Home/ShazamNavigator';
+
+// enableScreens(true);
 
 const Stack = createStackNavigator();
 

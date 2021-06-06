@@ -12,6 +12,8 @@ target 'react_native_shazam' do
     :hermes_enabled => false
   )
 
+  pod 'RNSharedElement', :path => '../node_modules/react-native-shared-element'
+
   target 'react_native_shazamTests' do
     inherit! :complete
     # Pods for testing
