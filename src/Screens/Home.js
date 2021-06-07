@@ -77,13 +77,13 @@ const Home = ({navigation, set_listening}) => {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{position: "absolute", top: 75, left: 25}}>
+                <View style={{position: "absolute", top: 60, left: 25}}>
                     <TouchableOpacity onPress={() => {navigation.navigate("Library")}}>
                         <MaterialCommunityIcons name="account-music" color="white" size={NAV_BUTTONS_SIZE} />
                     </TouchableOpacity>
                 </View>
 
-                <View style={{position: "absolute", top: 75, right: 25, backgroundColor: "white", borderRadius: NAV_BUTTONS_SIZE, width: NAV_BUTTONS_SIZE, height: NAV_BUTTONS_SIZE, justifyContent: "center", alignItems: "center"}}>
+                <View style={{position: "absolute", top: 60, right: 25, backgroundColor: "white", borderRadius: NAV_BUTTONS_SIZE, width: NAV_BUTTONS_SIZE, height: NAV_BUTTONS_SIZE, justifyContent: "center", alignItems: "center"}}>
                     <TouchableOpacity onPress={() => {navigation.navigate("Charts")}}>
                         <MaterialIcons name="insights" color="rgba(60, 180, 255, 1)" size={NAV_BUTTONS_SIZE-5} />
                     </TouchableOpacity>

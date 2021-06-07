@@ -9,7 +9,8 @@ const TAB_INDICATOR_SIZE = 8;
 
 export const Styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        position: "relative"
     },
     scroll_container: {
         flexGrow: 1,
@@ -63,6 +64,14 @@ export const Styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
+    tab_indicator_container: {
+        position: "absolute",
+        zIndex: 2,
+        justifyContent: "center",
+        width: "100%",
+        marginTop: 80,
+        flexDirection: "row"
+    },
     tab_indicator: {
         width: TAB_INDICATOR_SIZE,
         height: TAB_INDICATOR_SIZE,
@@ -71,5 +80,45 @@ export const Styles = StyleSheet.create({
     },
     home_tab_indicator: {
         backgroundColor: "rgba(255,255,255,0.7)"
+    },
+    basic_header_container: {
+        backgroundColor: "white",
+        flexDirection: "row",
+        justifyContent: "center",
+        paddingVertical: 10
+    },
+    basic_header_text: {
+        color: "black",
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 15
+    },
+    charts_image_background: {
+        position: "absolute",
+        backgroundColor: "rgba(110, 85, 155, 1)",
+        width,
+        height: 240
+    },
+    chart_button_container: {
+        justifyContent: "center",
+        alignItems: "center",
+        width,
+        height: 240,
+        color: "white",
+        fontSize: 14,
+        fontWeight: "bold",
+        marginBottom: 10
+    },
+    chart_button: {
+        backgroundColor: "white",
+        paddingVertical: 15,
+        paddingHorizontal: 45,
+        borderRadius: 8,
+        marginBottom: 10
+    },
+    chart_button_text: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "rgba(110, 85, 155, 1)",
     }
 });

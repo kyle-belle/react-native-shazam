@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 
 import ShazamNav from '../Navigators/Home/ShazamNavigator';
 import HomeTabBar from '../Components/HomeTabBar';
-import Home from '../Screens/Home';
+import Charts from '../Screens/Charts';
+import Library from '../Screens/Library';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -16,9 +17,9 @@ const HomeNavigator = ({listening}) => {
 
     return (
         <Tab.Navigator initialRouteName="Shazam" swipeEnabled={!listening} tabBar={props => <HomeTabBar {...props} />}>
-            <Tab.Screen name="Library" component={Home} />
+            <Tab.Screen name="Library" component={Library} />
             <Tab.Screen name="Shazam" component={ShazamNav} />
-            <Tab.Screen name="Charts" component={Home} />
+            <Tab.Screen name="Charts" component={Charts} />
         </Tab.Navigator>
     );
 }

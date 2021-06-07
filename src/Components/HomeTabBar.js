@@ -4,14 +4,14 @@ import {getFocusedRouteNameFromRoute} from "@react-navigation/native";
 import Animated from 'react-native-reanimated';
 import {Styles} from "../Styles";
 
-const {tab_indicator, home_tab_indicator} = Styles;
+const {tab_indicator_container, tab_indicator, home_tab_indicator} = Styles;
 
 export default ({ state, descriptors, navigation, position }) => {
 
     const focused_route = state.routes[state.index];
 
     return (
-        <View style={{position: "absolute", zIndex: 2, justifyContent: "center", width: "100%", marginTop: 90, flexDirection: "row"}}>
+        <View style={tab_indicator_container}>
             {state.routes.map((route, index) => {
             // const { options } = descriptors[route.key];
             // const label =
@@ -43,9 +43,14 @@ export default ({ state, descriptors, navigation, position }) => {
             // };
 
             const inputRange = state.routes.map((_, i) => i);
-            const opacity = Animated.interpolateNode(position, {
+            const active_color = Animated.interpolateColors(position, {
                 inputRange,
-                outputRange: inputRange.map(i => (i === index ? 1 : 0)),
+                outputColorRange: ["rgba(0, 150, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(0, 150, 255, 1)"],
+            });
+
+            const inactive_color = Animated.interpolateColors(position, {
+                inputRange,
+                outputColorRange: ["rgba(200, 200, 200, 1)", home_tab_indicator.backgroundColor, "rgba(200, 200, 200, 1)"],
             });
 
             if(focused_route.name === "Shazam"){
@@ -57,7 +62,7 @@ export default ({ state, descriptors, navigation, position }) => {
             }
 
             return (
-                <View key={route.key} style={[tab_indicator, home_tab_indicator, {backgroundColor: isFocused?"white":home_tab_indicator.backgroundColor}]}/>
+                <Animated.View key={route.key} style={[tab_indicator, home_tab_indicator, {backgroundColor: isFocused?active_color:inactive_color}]}/>
             );
             })}
         </View>
