@@ -4,8 +4,17 @@ const {width, height} = Dimensions.get("window");
 
 const SHAZAM_BUTTON_SIZE = width * 0.5;
 const LISTENING_SHAZAM_BUTTON_SIZE = SHAZAM_BUTTON_SIZE * 0.6;
+
 const SEARCH_BUTTON_SIZE = width * 0.13;
+
 const TAB_INDICATOR_SIZE = 8;
+
+const LIBRARY_CARD_SPACING = 10;
+const LIBRARY_CARD_WIDTH = (width / 2) - (LIBRARY_CARD_SPACING * 2);
+const LIBRARY_CARD_HEIGHT = LIBRARY_CARD_WIDTH * 1.6;
+
+const CHART_ENTRY_SPACING = 5;
+const CHART_ENTRY_SIZE = (width / 3) - (CHART_ENTRY_SPACING * 2);
 
 export const Styles = StyleSheet.create({
     container: {
@@ -85,13 +94,14 @@ export const Styles = StyleSheet.create({
         backgroundColor: "white",
         flexDirection: "row",
         justifyContent: "center",
-        paddingVertical: 10
+        paddingVertical: 10,
+        elevation: 5
     },
     basic_header_text: {
         color: "black",
         fontSize: 20,
         fontWeight: "bold",
-        marginBottom: 15
+        marginBottom: 15,
     },
     charts_image_background: {
         position: "absolute",
@@ -120,5 +130,88 @@ export const Styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         color: "rgba(110, 85, 155, 1)",
+    },
+    chart_list_container: {
+        padding: 12,
+        paddingBottom: 25,
+        backgroundColor: "white",
+        marginBottom: 10
+    },
+    chart_entry: {
+        width: CHART_ENTRY_SIZE,
+        margin: CHART_ENTRY_SPACING,
+        fontSize: 14,
+        color: "rgba(80,80,80,1)",
+        fontWeight: "normal"
+    },
+    chart_entry_song_name: {
+        width: CHART_ENTRY_SIZE,
+        fontSize: 16,
+        fontWeight: "bold",
+        // marginVertical: 4
+    },
+    library_label: {
+        position: "relative",
+        justifyContent: "center",
+        // flexDirection: "row",
+        backgroundColor: "white",
+        paddingHorizontal: 15,
+        paddingVertical: 15,
+        color: "black",
+        fontSize: 18,
+        fontWeight: "bold"
+    },
+    library_card: {
+        elevation: 5,
+        overflow: "hidden",
+        backgroundColor: "white",
+        width: LIBRARY_CARD_WIDTH,
+        height: LIBRARY_CARD_HEIGHT,
+        margin: LIBRARY_CARD_SPACING,
+        borderRadius: 5,
+        shadowColor: "black",
+        // shadowColor: "rgba(0,150,255,1)",
+        shadowOpacity: 0.6,
+        shadowRadius: 5,
+        shadowOffset: {height: 0, width: 0}
+    },
+    library_card_shazam_song_name: {
+        fontSize: 20,
+        fontWeight: "bold"
+    },
+    apple_music_pill: {
+        paddingVertical: 4,
+        paddingHorizontal: 10,
+        color: "white",
+        borderRadius: 15,
+        fontSize: 12,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "black"
+    },
+    library_card_save_text: {
+        fontSize: 22,
+        fontWeight: "bold",
+        color: "rgba(0,150,255,1)"
+    },
+    library_card_login_text: {
+        width: "90%",
+        fontSize: 16,
+        color: "white",
+        borderRadius: 8,
+        fontWeight: "bold",
+        paddingVertical: 5,
+        textAlign: "center",
+        alignSelf: "center",
+        backgroundColor: "rgba(0,150,255,1)"
+    },
+    hr_thin: {
+        position: "absolute",
+        bottom: 0,
+        height: 0,
+        width: "90%",
+        borderBottomWidth: 0.5,
+        borderColor: "rgba(235, 235, 235, 1)",
+        marginLeft: "15%"
     }
 });

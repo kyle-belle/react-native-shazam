@@ -1,6 +1,6 @@
-import {SET_LISTENING} from "../Actions/types";
+import {} from "../Actions/types";
 
-const INITIAL_STATE = {listening: false, history: []};
+const INITIAL_STATE = {logged_in: false};
 
 export default (state=INITIAL_STATE, action) => {
     const {type, payload} = action;
@@ -8,10 +8,6 @@ export default (state=INITIAL_STATE, action) => {
     const new_state = {...state};
 
     switch(type){
-
-        case SET_LISTENING:
-            new_state.listening = payload.listening;
-        break;
 
         default:
             return state;
