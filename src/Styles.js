@@ -16,10 +16,15 @@ const LIBRARY_CARD_HEIGHT = LIBRARY_CARD_WIDTH * 1.6;
 const CHART_ENTRY_SPACING = 5;
 const CHART_ENTRY_SIZE = (width / 3) - (CHART_ENTRY_SPACING * 2);
 
+const EQUALIZER_SIZE = 60;
+
 export const Styles = StyleSheet.create({
     container: {
         flex: 1,
         position: "relative"
+    },
+    overlay: {
+        backgroundColor: "rgba(0,0,0,0.2)"
     },
     scroll_container: {
         flexGrow: 1,
@@ -213,5 +218,24 @@ export const Styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         borderColor: "rgba(235, 235, 235, 1)",
         marginLeft: "15%"
+    },
+    equalizer_overlay: {
+        right: 25,
+        bottom: 25,
+        elevation: 5,
+        overflow: "hidden",
+        position: "absolute",
+        width: EQUALIZER_SIZE,
+        height: EQUALIZER_SIZE,
+        borderRadius: EQUALIZER_SIZE
+    },
+    equalizer_line: {
+        width: 5,
+        borderRadius: 5,
+        marginHorizontal: 2,
+        alignSelf: "flex-end",
+        height: EQUALIZER_SIZE * 0.4,
+        marginBottom: EQUALIZER_SIZE * 0.3,
+        backgroundColor: "rgba(0, 150, 255, 1)",
     }
 });

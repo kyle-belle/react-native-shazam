@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StatusBar, Text, useColorScheme, View} from 'react-native';
+import {StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import {createStore} from "redux";
@@ -17,9 +17,12 @@ import Reducers from "./src/Reducers";
 import HomeNav from "./src/Navigators/HomeNavigator";
 import { enableScreens } from 'react-native-screens';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
-import ShazamNavigator from './src/Navigators/Home/ShazamNavigator';
+import { Styles } from './src/Styles';
 
-// enableScreens(true);
+const {equalizer_overlay, equalizer_line} = Styles;
+
+
+
 
 const Stack = createStackNavigator();
 

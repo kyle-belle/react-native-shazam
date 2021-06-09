@@ -1,3 +1,4 @@
 export const SET_PLAYING = "SET_PLAYING";
 export const SET_LISTENING = "SET_LISTENING";
 export const ADD_LOADED_SONG = "ADD_LOADED_SONG";
+export const REMOVE_LOADED_SONG = "REMOVE_LOADED_SONG";
