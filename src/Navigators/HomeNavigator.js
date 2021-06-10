@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import {Animated, View, TouchableHighlight, Dimensions } from 'react-native';
+import {View, Dimensions } from 'react-native';
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
 import {getFocusedRouteNameFromRoute} from "@react-navigation/native";
 import { connect } from 'react-redux';
@@ -27,7 +27,7 @@ const HomeNavigator = ({listening, playing_song}) => {
 
     return (
         <View style={container}>
-            <Tab.Navigator initialLayout={{width, height}} initialRouteName="Shazam" swipeEnabled={!listening} tabBar={props => <HomeTabBar {...props} />}>
+            <Tab.Navigator lazy lazyPreloadDistance={1} initialLayout={{width, height}} initialRouteName="Shazam" swipeEnabled={!listening} tabBar={props => <HomeTabBar {...props} />}>
                 <Tab.Screen name="Library" component={Library} />
                 <Tab.Screen name="Shazam" component={ShazamNav} />
                 <Tab.Screen name="Charts" component={Charts} />

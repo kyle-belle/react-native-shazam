@@ -15,7 +15,7 @@ const Charts = ({navigation}) => {
         <SafeAreaView edges={["top"]} style={container}>
             <BasicHeader title="Charts" />
             <ScrollView style={container} contentContainerStyle={scroll_container}>
-                <Image source={require("../Assets/purple-world-map.png")} style={charts_image_background} />
+                <Image source={require("../Assets/Images/purple-world-map.png")} style={charts_image_background} />
 
                 <View style={chart_button_container}>
                     <TouchableOpacity style={chart_button}>
@@ -26,7 +26,7 @@ const Charts = ({navigation}) => {
                 </View>
 
                 {CHARTS.map((chart, i) => {
-                    return <ChartList chart={chart} key={i.toString()} />
+                    return <ChartList navigation={navigation} chart={chart} key={i.toString()} />
                 })}
             </ScrollView>
         </SafeAreaView>

@@ -1,10 +1,12 @@
 import {combineReducers} from "redux";
-import ShazamReducer from "./ShazamReducer";
-import UserReducer from "./UserReducer";
 import AppReducer from "./AppReducer";
+import UserReducer from "./UserReducer";
+import ShazamReducer from "./ShazamReducer";
+import SongDetailReducer from "./SoundDetailReducer";
 
 export default combineReducers({
     app: AppReducer,
     user: UserReducer,
-    shazam: ShazamReducer
+    shazam: ShazamReducer,
+    songDetails: SongDetailReducer
 })

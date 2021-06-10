@@ -4,11 +4,17 @@ import { Styles } from '../Styles';
 
 const {library_card} = Styles;
 
-const LibraryCard = ({children=[]}) => {
+const LibraryCard = ({children=[], onPress}) => {
     
+    const onPressLibraryCard = () => {
+        if(typeof(onPress) === "function"){
+            onPress();
+        }
+    }
+
     return (
         <View style={library_card}>
-            <TouchableHighlight underlayColor={"rgba(230,230,230,1)"} activeOpacity={0.5} style={{flex: 1}} onPress={() => {console.log("Pressed Library Card")}}>
+            <TouchableHighlight underlayColor={"rgba(230,230,230,1)"} activeOpacity={0.5} style={{flex: 1}} onPress={onPressLibraryCard}>
                 {children??<Fragment />}
             </TouchableHighlight>
         </View>

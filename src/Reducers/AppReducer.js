@@ -1,6 +1,6 @@
-import {SET_PLAYING, ADD_LOADED_SONG, REMOVE_LOADED_SONG} from "../Actions/types";
+import {SET_PLAYING, ADD_LOADED_SONG, SET_LOADING_SONG, REMOVE_LOADED_SONG} from "../Actions/types";
 
-const INITIAL_STATE = {playing_song: null, loaded_songs: []};
+const INITIAL_STATE = {playing_song: null, loading_song: null, loaded_songs: []};
 
 export default (state=INITIAL_STATE, action) => {
     const {type, payload} = action;
@@ -14,6 +14,10 @@ export default (state=INITIAL_STATE, action) => {
             if(payload.song){
                 // payload.song.player.pause();
             }
+        break;
+
+        case SET_LOADING_SONG:
+            new_state.loading_song = payload.song;
         break;
 
         case ADD_LOADED_SONG:

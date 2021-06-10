@@ -7,22 +7,19 @@
  */
 
 import React from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
-import {NavigationContainer} from "@react-navigation/native";
-import {createStackNavigator} from "@react-navigation/stack";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import Reducers from "./src/Reducers";
+import { enableScreens } from 'react-native-screens';
+import {StatusBar, useColorScheme, View} from 'react-native';
+import {NavigationContainer} from "@react-navigation/native";
+import {createStackNavigator} from "@react-navigation/stack";
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 import HomeNav from "./src/Navigators/HomeNavigator";
-import { enableScreens } from 'react-native-screens';
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
-import { Styles } from './src/Styles';
+import SongDetailsNavigator from './src/Navigators/SongDetailsNavigator';
 
-const {equalizer_overlay, equalizer_line} = Styles;
-
-
-
+// console.log("StatusBar Height", StatusBar.currentHeight);
 
 const Stack = createStackNavigator();
 
@@ -36,6 +33,7 @@ const App = () => {
       <NavigationContainer>
           <Stack.Navigator initialRouteName="Home" headerMode="none">
             <Stack.Screen name="Home" component={HomeNav} />
+            <Stack.Screen name="SongDetails" component={SongDetailsNavigator} />
           </Stack.Navigator>
           <StatusBar barStyle="light-content" translucent backgroundColor="rgba(0,0,0,0.1)" />
       </NavigationContainer>

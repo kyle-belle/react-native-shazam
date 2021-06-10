@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from "react-native";
+import {StyleSheet, Dimensions, StatusBar} from "react-native";
 
 const {width, height} = Dimensions.get("window");
 
@@ -18,6 +18,10 @@ const CHART_ENTRY_SIZE = (width / 3) - (CHART_ENTRY_SPACING * 2);
 
 const EQUALIZER_SIZE = 60;
 
+const SONG_DETAIL_TAB_HORIZONTAL_SPACING = 16;
+const SONG_DETAIL_TAB_VERTICAL_SPACING = 10;
+const SONG_DETAIL_TAB_INDICATOR_BORDER_RADIUS = 20;
+
 export const Styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -30,11 +34,12 @@ export const Styles = StyleSheet.create({
         flexGrow: 1,
     },
     home_gradient: {
-        justifyContent: "center",
+        // justifyContent: "center",
         alignItems: "center"
     },
     home_text: {
-        color: "white"
+        color: "white",
+        marginTop: StatusBar.currentHeight + 100
     },
     action_text: {
         fontSize: 22,
@@ -83,7 +88,7 @@ export const Styles = StyleSheet.create({
         zIndex: 2,
         justifyContent: "center",
         width: "100%",
-        marginTop: 80,
+        top: 45 + StatusBar.currentHeight,
         flexDirection: "row"
     },
     tab_indicator: {
@@ -237,5 +242,34 @@ export const Styles = StyleSheet.create({
         height: EQUALIZER_SIZE * 0.4,
         marginBottom: EQUALIZER_SIZE * 0.3,
         backgroundColor: "rgba(0, 150, 255, 1)",
+    },
+    song_details_tab_bar_container: {
+        top: 50,
+        zIndex: 2,
+        position: "absolute"
+    },
+    song_details_tab_indicators_container: {
+        width: width * 0.75,
+        marginHorizontal: width * 0.125,
+        borderRadius: SONG_DETAIL_TAB_INDICATOR_BORDER_RADIUS,
+        overflow: "hidden"
+    },
+    song_details_tab: {
+        fontSize: 12,
+        color: "white",
+        marginVertical: SONG_DETAIL_TAB_VERTICAL_SPACING,
+        marginHorizontal: SONG_DETAIL_TAB_HORIZONTAL_SPACING,
+    },
+    song_details_tab_indicator_background: {
+        backgroundColor: "rgba(0, 150, 255, 1)",
+        borderRadius: SONG_DETAIL_TAB_INDICATOR_BORDER_RADIUS,
+        marginVertical: SONG_DETAIL_TAB_VERTICAL_SPACING,
+        position: "absolute"
+    },
+    song_details_tab_bar_side_button_container: {
+        position: "absolute",
+        alignItems: "center",
+        width: "12.5%",
+        top: 3
     }
 });
