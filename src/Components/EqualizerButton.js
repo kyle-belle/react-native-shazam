@@ -20,7 +20,7 @@ const equalizer_show_animation = Animated.timing(equalizer_scale, {toValue: 1, d
 
 const equalizer_hide_animation = Animated.timing(equalizer_scale, {toValue: 0, duration: 200, useNativeDriver: true});
 
-const EqualizerButton = ({playing=false, onPress}) => {
+const EqualizerButton = ({playing=false, loading_song=null, onPress}) => {
     
     const show_equalizer = () => {
         equalizer_show_animation.start();
@@ -31,14 +31,15 @@ const EqualizerButton = ({playing=false, onPress}) => {
     }
 
     const onPressEqualizer = () => {
-        console.log("Equalizer Pressed");
         if(typeof(onPress) === "function"){
             onPress();
+        }else{
+            console.log("Equalizer Pressed");
         }
     }
 
     useEffect(() => {
-        if(playing){
+        if(playing || loading_song){
             show_equalizer();
             equalizer_animations.start();
         }else{
@@ -46,16 +47,16 @@ const EqualizerButton = ({playing=false, onPress}) => {
             equalizer_animations.stop();
             equalizer_animations.reset();
         }
-    }, [playing]);
+    }, [playing, loading_song]);
     
     return (
-        <Animated.View style={[equalizer_overlay, {transform: [{scale: equalizer_scale}]}]}>
+        <Animated.View pointerEvents={(playing || loading_song)?"auto":"none"} style={[equalizer_overlay, {transform: [{scale: equalizer_scale}]}]}>
             <TouchableHighlight onPress={onPressEqualizer}>
                 <View style={{width: equalizer_overlay.width, height: equalizer_overlay.height, backgroundColor: "white", flexDirection: "row", justifyContent: "center"}}>
                     {equalizer_lines.map((_, i) => {
                     const height = equalizer_heights[i];
 
-                    return <Animated.View key={i.toString()} style={[equalizer_line, {height: height}]} />
+                    return <Animated.View key={i.toString()} style={[equalizer_line, {height: height, backgroundColor: loading_song?"rgba(200,200,200,1)":equalizer_line.backgroundColor}]} />
                     })}
                 </View>
             </TouchableHighlight>

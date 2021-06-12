@@ -17,7 +17,7 @@ const {container} = Styles;
 
 const Tab = createMaterialTopTabNavigator();
 
-const HomeNavigator = ({listening, playing_song}) => {
+const HomeNavigator = ({listening, playing_song=null, loading_song=null}) => {
 
     // console.log("listening", listening);
 
@@ -33,13 +33,13 @@ const HomeNavigator = ({listening, playing_song}) => {
                 <Tab.Screen name="Charts" component={Charts} />
             </Tab.Navigator>
 
-            <EqualizerButton playing={!!playing_song} />
+            <EqualizerButton playing={!!playing_song} loading_song={loading_song} />
         </View>
     );
 }
 
 function map_state_to_props({shazam, app}){
-    return ({listening: shazam.listening, playing_song: app.playing_song})
+    return ({listening: shazam.listening, loading_song: app.loading_song, playing_song: app.playing_song})
 }
 
 export default connect(map_state_to_props)(HomeNavigator);

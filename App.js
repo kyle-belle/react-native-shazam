@@ -9,9 +9,9 @@
 import React from 'react';
 import {createStore} from "redux";
 import {Provider} from "react-redux";
-import Reducers from "./src/Reducers";
+import { store } from "./src/Reducers";
 import { enableScreens } from 'react-native-screens';
-import {StatusBar, useColorScheme, View} from 'react-native';
+import {StatusBar, useColorScheme, PixelRatio, View} from 'react-native';
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
@@ -19,11 +19,9 @@ import { createSharedElementStackNavigator } from 'react-navigation-shared-eleme
 import HomeNav from "./src/Navigators/HomeNavigator";
 import SongDetailsNavigator from './src/Navigators/SongDetailsNavigator';
 
-// console.log("StatusBar Height", StatusBar.currentHeight);
+console.log("Pixel Ratio", PixelRatio.get());
 
 const Stack = createStackNavigator();
-
-const store = createStore(Reducers, {});
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';

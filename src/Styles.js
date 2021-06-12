@@ -1,6 +1,7 @@
-import {StyleSheet, Dimensions, StatusBar} from "react-native";
+import {StyleSheet, Dimensions, StatusBar, PixelRatio} from "react-native";
 
 const {width, height} = Dimensions.get("window");
+const pixel_ratio = PixelRatio.get();
 
 const SHAZAM_BUTTON_SIZE = width * 0.5;
 const LISTENING_SHAZAM_BUTTON_SIZE = SHAZAM_BUTTON_SIZE * 0.6;
@@ -21,6 +22,8 @@ const EQUALIZER_SIZE = 60;
 const SONG_DETAIL_TAB_HORIZONTAL_SPACING = 16;
 const SONG_DETAIL_TAB_VERTICAL_SPACING = 10;
 const SONG_DETAIL_TAB_INDICATOR_BORDER_RADIUS = 20;
+
+const SONG_ARTIST_IAMGE_SIZE = 100;
 
 export const Styles = StyleSheet.create({
     container: {
@@ -183,10 +186,11 @@ export const Styles = StyleSheet.create({
         // shadowColor: "rgba(0,150,255,1)",
         shadowOpacity: 0.6,
         shadowRadius: 5,
-        shadowOffset: {height: 0, width: 0}
+        shadowOffset: {height: 0, width: 0},
+        fontSize: 48 / pixel_ratio
     },
     library_card_shazam_song_name: {
-        fontSize: 20,
+        fontSize: 70 / pixel_ratio,
         fontWeight: "bold"
     },
     apple_music_pill: {
@@ -271,5 +275,18 @@ export const Styles = StyleSheet.create({
         alignItems: "center",
         width: "12.5%",
         top: 3
+    },
+    song_artist_image_container: {
+        marginBottom: 15,
+        overflow: "hidden",
+        width: SONG_ARTIST_IAMGE_SIZE,
+        height: SONG_ARTIST_IAMGE_SIZE,
+        borderRadius: SONG_ARTIST_IAMGE_SIZE
+    },
+    song_artist_name: {
+        fontSize: 20,
+        color: "white",
+        fontWeight: "bold",
+        marginBottom: 20
     }
 });

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, createRef } from 'react';
-import { View, Text, TouchableOpacity, FlatList, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, Dimensions, Share } from 'react-native';
 import {getFocusedRouteNameFromRoute} from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Animated from 'react-native-reanimated';
 import {Styles} from "../Styles";
 
-const {width, height} = Dimensions.get("window");
+const {width: device_width, height} = Dimensions.get("window");
 
 const {song_details_tab_bar_container, song_details_tab_indicators_container, song_details_tab, song_details_tab_indicator_background, song_details_tab_bar_side_button_container} = Styles;
 
@@ -17,12 +17,25 @@ const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList);
 const TAB_INDICATOR_BACKGROUND_HORIZONTAL_PADDING = 30;
 const TAB_INDICATOR_BACKGROUND_VERTICAL_PADDING = 16;
 
-export default ({ state, descriptors, navigation, position }) => {
-    
+export default ({ state, descriptors, navigation, position, song={} }) => {
+    const {accent_color="#00F0FF", audio_src, name="Song Name"} = song;
+
     const flatlist_ref = useRef(null);
     const tab_container_ref = useRef(null);
     const tab_refs = useRef(state.routes.map(() => createRef())).current;
     const [tabMeasurements, setTabMeasurements] = useState(state.routes.map(() => ({x: 0, y: 0, width: 0, height: 0})));
+
+    const onPressShare = async () => {
+        const share_result = await Share.share({url: audio_src, message: `Hey I Used Shazam to discover ${name} | ${audio_src}`, title: "Shazam"}).catch((e) => {
+            alert("Share Error", e.message);
+        });
+
+        // if(share_result.action === Share.sharedAction){
+
+        // }else{
+
+        // }
+    }
 
     useEffect(() => {
         const tms = [];
@@ -58,7 +71,7 @@ export default ({ state, descriptors, navigation, position }) => {
         <View style={song_details_tab_bar_container}>
             <View ref={tab_container_ref} style={song_details_tab_indicators_container}>
 
-                <Animated.View style={[song_details_tab_indicator_background, {width: Animated.add(width, new Animated.Value(TAB_INDICATOR_BACKGROUND_HORIZONTAL_PADDING)), transform: [{translateX: Animated.sub(translateX, new Animated.Value(TAB_INDICATOR_BACKGROUND_HORIZONTAL_PADDING/2))}, {translateY: -(TAB_INDICATOR_BACKGROUND_VERTICAL_PADDING/2)}], height: tabMeasurements[0].height + TAB_INDICATOR_BACKGROUND_VERTICAL_PADDING, left}]} />
+                <Animated.View style={[song_details_tab_indicator_background, {backgroundColor: accent_color || song_details_tab_indicator_background.backgroundColor, width: Animated.add(width, new Animated.Value(TAB_INDICATOR_BACKGROUND_HORIZONTAL_PADDING)), transform: [{translateX: Animated.sub(translateX, new Animated.Value(TAB_INDICATOR_BACKGROUND_HORIZONTAL_PADDING/2))}, {translateY: -(TAB_INDICATOR_BACKGROUND_VERTICAL_PADDING/2)}], height: tabMeasurements[0].height + TAB_INDICATOR_BACKGROUND_VERTICAL_PADDING, left}]} />
                 
                 <AnimatedFlatlist ref={flatlist_ref} data={state.routes} bounces={false} showsHorizontalScrollIndicator={false} horizontal onScroll={Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}])} renderItem={({item:route, index}) => {
                     const { options } = descriptors[route.key];
@@ -110,7 +123,7 @@ export default ({ state, descriptors, navigation, position }) => {
             </View>
 
             <View style={[song_details_tab_bar_side_button_container, {right: 0}]}>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={onPressShare}>
                     <MaterialIcons name="share" color="white" size={25} />
                 </TouchableOpacity>
             </View>

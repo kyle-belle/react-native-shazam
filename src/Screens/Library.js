@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import LibraryShazam from '../Components/LibraryShazam';
 
 import {set_song_for_details} from "../Actions";
-import { DEFAULT_SONG } from '../Dev-Data/songs';
+import { DEFAULT_SONG_SRC } from '../Dev-Data/songs';
 
 const {width, height} = Dimensions.get("window");
 
@@ -67,11 +67,11 @@ const Library = ({navigation, logged_in=false, set_song_for_details}) => {
 
                 <View style={{flexDirection: "row", flexWrap: "wrap", marginBottom: 20}}>
                     {[{},{},{},{},{},{},{},{}].map((song, index) => {
-                        const {name:song_name="Song Name", artist={}, album={}, featuring=[], artwork=index%2?"https://i0.wp.com/creativesfeed.com/wp-content/uploads/2018/08/Art-vs-Science-by-Andrew-Fairclough.jpg?w=8000&ssl=1":"https://2.bp.blogspot.com/_r8S5Fu_ozR0/TUDZiV_ticI/AAAAAAAAARY/1Myw-kkBC7U/s1600/cream.jpg", audio_src=DEFAULT_SONG} = song;
+                        const {name:song_name="Song Name", artist={}, album={}, featuring=[], artwork=index%2?"https://i0.wp.com/creativesfeed.com/wp-content/uploads/2018/08/Art-vs-Science-by-Andrew-Fairclough.jpg?w=8000&ssl=1":"https://cdn.dribbble.com/users/2113371/screenshots/6521709/drake_final_2x.jpg", audio_src=DEFAULT_SONG_SRC, accent_color=index%2?"#FF5555":"#00A0FF"} = song;
                         const {name:artist_name="Artist Name"} = artist;
 
                         return (
-                            <LibraryCard onPress={() => {onPressLibraryCard({...song, artwork, audio_src})}} key={index.toString()}>
+                            <LibraryCard onPress={() => {onPressLibraryCard({...song, artwork, audio_src, accent_color})}} key={index.toString()}>
                                 {(index===0 && !logged_in)?(
                                     <View style={[container, {justifyContent: "center", alignItems: "center"}]}>
                                         <IonIcons name="ios-cloud-done" size={library_card.width * 0.3} color="rgba(0, 150, 255,1)" />

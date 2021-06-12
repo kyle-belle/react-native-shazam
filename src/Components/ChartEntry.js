@@ -1,18 +1,18 @@
 import React from 'react';
 import { View, Text, Image, TouchableHighlight, TouchableOpacity } from 'react-native';
-import { DEFAULT_SONG } from '../Dev-Data/songs';
+import { DEFAULT_SONG_SRC } from '../Dev-Data/songs';
 import { Styles } from '../Styles';
 
 const {chart_entry, chart_entry_song_name} = Styles;
 
 const ChartEntry = ({entry={}, index=1, onPress}) => {
     const {song={}} = entry
-    const {name:song_name="Song Name", artist={}, album={}, featuring=[], artwork=index%2?"https://i0.wp.com/creativesfeed.com/wp-content/uploads/2018/08/Art-vs-Science-by-Andrew-Fairclough.jpg?w=8000&ssl=1":"https://2.bp.blogspot.com/_r8S5Fu_ozR0/TUDZiV_ticI/AAAAAAAAARY/1Myw-kkBC7U/s1600/cream.jpg", audio_src=DEFAULT_SONG} = song;
+    const {name:song_name="Song Name", artist={}, album={}, featuring=[], artwork=index%2?"https://i0.wp.com/creativesfeed.com/wp-content/uploads/2018/08/Art-vs-Science-by-Andrew-Fairclough.jpg?w=8000&ssl=1":"https://cdn.dribbble.com/users/2113371/screenshots/6521709/drake_final_2x.jpg", audio_src=DEFAULT_SONG_SRC, accent_color=index%2?"#FF5555":"#00A0FF"} = song;
     const {name:artist_name="Artist Name"} = artist;
 
     const onPressEntry = () => {
         if(typeof(onPress) === "function"){
-            onPress({...song, artwork, audio_src})
+            onPress({...song, artwork, audio_src, accent_color})
         }
     }
 
