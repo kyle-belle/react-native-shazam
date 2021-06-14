@@ -1,12 +1,14 @@
 import React, {useEffect} from 'react';
-import { View, Text, ScrollView, Dimensions, TouchableOpacity, Animated } from 'react-native';
+import { View, Text, ScrollView, Dimensions, TouchableOpacity, Animated, Vibration } from 'react-native';
 import LinearGradient from "react-native-linear-gradient";
 import FontistoIcons from "react-native-vector-icons/Fontisto";
 import AntIcons from "react-native-vector-icons/AntDesign";
 import { SharedElement } from 'react-navigation-shared-element';
 import { connect } from 'react-redux';
 import {Styles} from "../Styles";
-import {set_listening} from "../Actions";
+import {set_listening, set_song_for_details} from "../Actions";
+import { DEFAULT_SONG_SRC } from '../Dev-Data/songs';
+import { play_song_from_network } from '../Utils';
 
 const {container, shazam_button_container, shazam_button_background, listening_shazam_button_background, search_button_container, search_button_background, scroll_container, home_gradient, home_text, action_text} = Styles;
 
@@ -47,7 +49,6 @@ const reset_animation_values = () => {
     });
 }
 
-
 const {width, height} = Dimensions.get("window");
 
 const SHAZAM_BUTTON_SIZE = width * 0.5;
@@ -56,11 +57,15 @@ const NAV_BUTTONS_SIZE = 20;
 
 const AnimatedFontistoIcons = Animated.createAnimatedComponent(FontistoIcons);
 
-const Listening = ({navigation, set_listening}) => {
+const Listening = ({navigation, set_listening, set_song_for_details}) => {
 
     useEffect(() => {
         circle_animations.start();
         big_circle_animations.start();
+
+        const song = {name: "Song Name", artist: {}, album: {}, featuring: [], artwork: "https://cdn.dribbble.com/users/2113371/screenshots/6521709/drake_final_2x.jpg", audio_src: DEFAULT_SONG_SRC, accent_color: "#00A0FF"}
+
+        setTimeout(() => {set_listening(false); set_song_for_details(song); Vibration.vibrate([0, 500, 100, 300]); navigation.navigate("Main"); navigation.navigate("SongDetails", {discover: true});}, 3000);
 
         return () => {circle_animations.stop(); big_circle_animations.stop(); big_circle_animations.reset(); circle_animations.reset(); reset_animation_values();}
     }, [])
@@ -72,7 +77,6 @@ const Listening = ({navigation, set_listening}) => {
     }
 
     const onPressClose = () => {
-        console.log("Close Pressed");
         navigation.navigate("Main");
         set_listening(false);
     }
@@ -122,4 +126,4 @@ Listening.sharedElements = (route, otherRoute, showing) => {
     return ["shazam-button", "shazam-button-background"];
 }
 
-export default connect(null, {set_listening})(Listening)
+export default connect(null, {set_listening, set_song_for_details})(Listening)

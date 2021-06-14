@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
-import {set_playing, add_loaded_song, set_loading_song, remove_loaded_song} from "../Actions";
+import {set_playing, add_loaded_song, set_loading_song, remove_loaded_song, show_options_sheet} from "../Actions";
 import { Styles } from '../Styles';
 import Sound from "react-native-sound";
 import AntIcons from "react-native-vector-icons/AntDesign";
@@ -17,7 +17,7 @@ const {container, library_card, library_card_shazam_song_name, apple_music_pill}
 
 let s; 
 
-const LibraryShazam = ({shazam={}, index=1, loaded_songs=[], loading_song, set_playing, add_loaded_song, set_loading_song, remove_loaded_song}) => {
+const LibraryShazam = ({shazam={}, index=1, loaded_songs=[], loading_song, set_playing, add_loaded_song, set_loading_song, remove_loaded_song, show_options_sheet}) => {
     const {song={}} = shazam;
     const [songLoaded, setSongLoaded] = useState(false);
     const [playing, setPlaying] = useState(false);
@@ -34,7 +34,11 @@ const LibraryShazam = ({shazam={}, index=1, loaded_songs=[], loading_song, set_p
 
     const onPressPlay = () => {
 
-        s = play_song_from_network({...song, artwork, audio_src, accent_color}, (s, already_loaded, paused) => {setPlaying(!paused);}, (e) => {console.log(e);}, () => {setPlaying(false)});
+        s = play_song_from_network({...song, name: song_name, artwork, audio_src, accent_color}, (s, already_loaded, paused) => {setPlaying(!paused);}, (e) => {console.log(e);}, () => {setPlaying(false)});
+    }
+
+    const onPressOptions = () => {
+        show_options_sheet({...song, name: song_name, artwork, audio_src});
     }
 
     return (
@@ -54,7 +58,7 @@ const LibraryShazam = ({shazam={}, index=1, loaded_songs=[], loading_song, set_p
             </View>
 
             <View style={{position: "absolute", right: 15, top: 15}}>
-                <TouchableOpacity><IonIcons name="ellipsis-vertical" color="white" size={22} /></TouchableOpacity>
+                <TouchableOpacity onPress={onPressOptions}><IonIcons name="ellipsis-vertical" color="white" size={22} /></TouchableOpacity>
             </View>
         </View>
     );
@@ -64,4 +68,4 @@ function map_state_to_props({app}){
     return {loaded_songs: app.loaded_songs, loading_song: app.loading_song}
 }
 
-export default connect(map_state_to_props, {set_playing, add_loaded_song, set_loading_song, remove_loaded_song})(LibraryShazam);
+export default connect(map_state_to_props, {set_playing, add_loaded_song, set_loading_song, remove_loaded_song, show_options_sheet})(LibraryShazam);

@@ -10,14 +10,14 @@ const {width: device_width, height} = Dimensions.get("window");
 
 const {song_details_tab_bar_container, song_details_tab_indicators_container, song_details_tab, song_details_tab_indicator_background, song_details_tab_bar_side_button_container} = Styles;
 
-const scrollX = new Animated.Value(0);
 
 const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList);
 
 const TAB_INDICATOR_BACKGROUND_HORIZONTAL_PADDING = 30;
 const TAB_INDICATOR_BACKGROUND_VERTICAL_PADDING = 16;
 
-export default ({ state, descriptors, navigation, position, song={} }) => {
+export default ({ state, descriptors, navigation, position, song={}, discover=false, global_opacity }) => {
+    const scrollX = useRef(new Animated.Value(0)).current;
     const {accent_color="#00F0FF", audio_src, name="Song Name"} = song;
 
     const flatlist_ref = useRef(null);
@@ -55,12 +55,14 @@ export default ({ state, descriptors, navigation, position, song={} }) => {
 
     const width = Animated.interpolateNode(position, {
         inputRange,
-        outputRange: tabMeasurements.map(({width}) => width)
+        outputRange: tabMeasurements.map(({width}) => width),
+        extrapolate: "clamp"
     });
 
     const translateX = Animated.interpolateNode(position, {
         inputRange,
-        outputRange: tabMeasurements.map(({x}) => x)
+        outputRange: tabMeasurements.map(({x}) => x),
+        extrapolate: "clamp"
     });
 
     const left = Animated.multiply(scrollX, new Animated.Value(-1));
@@ -68,7 +70,7 @@ export default ({ state, descriptors, navigation, position, song={} }) => {
     flatlist_ref.current?.scrollToOffset({offset: state.index?tabMeasurements[state.index].x-50:0, animated: true})
 
     return (
-        <View style={song_details_tab_bar_container}>
+        <Animated.View style={[song_details_tab_bar_container, {opacity: global_opacity}]}>
             <View ref={tab_container_ref} style={song_details_tab_indicators_container}>
 
                 <Animated.View style={[song_details_tab_indicator_background, {backgroundColor: accent_color || song_details_tab_indicator_background.backgroundColor, width: Animated.add(width, new Animated.Value(TAB_INDICATOR_BACKGROUND_HORIZONTAL_PADDING)), transform: [{translateX: Animated.sub(translateX, new Animated.Value(TAB_INDICATOR_BACKGROUND_HORIZONTAL_PADDING/2))}, {translateY: -(TAB_INDICATOR_BACKGROUND_VERTICAL_PADDING/2)}], height: tabMeasurements[0].height + TAB_INDICATOR_BACKGROUND_VERTICAL_PADDING, left}]} />
@@ -127,6 +129,6 @@ export default ({ state, descriptors, navigation, position, song={} }) => {
                     <MaterialIcons name="share" color="white" size={25} />
                 </TouchableOpacity>
             </View>
-        </View>
+        </Animated.View>
     );
 }

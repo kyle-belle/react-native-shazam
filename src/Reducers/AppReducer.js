@@ -1,6 +1,6 @@
-import {SET_PLAYING, ADD_LOADED_SONG, SET_LOADING_SONG, REMOVE_LOADED_SONG} from "../Actions/types";
+import {SET_PLAYING, ADD_LOADED_SONG, SHOW_OPTIONS_SHEET, SET_LOADING_SONG, REMOVE_LOADED_SONG} from "../Actions/types";
 
-const INITIAL_STATE = {playing_song: null, loading_song: null, loaded_songs: []};
+const INITIAL_STATE = {playing_song: null, loading_song: null, loaded_songs: [], options_song: false};
 
 export default (state=INITIAL_STATE, action) => {
     const {type, payload} = action;
@@ -41,6 +41,10 @@ export default (state=INITIAL_STATE, action) => {
                     new_state.loaded_songs = [...new_state.loaded_songs];
                 }
             }
+        break;
+
+        case SHOW_OPTIONS_SHEET:
+            new_state.options_song = payload.song;
         break;
 
         default:

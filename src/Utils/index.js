@@ -1,6 +1,7 @@
 import Sound from "react-native-sound";
 import { add_loaded_song, set_loading_song, set_playing } from "../Actions";
 import { store } from "../Reducers";
+import Animated from "react-native-reanimated";
 
 const {dispatch} = store;
 
@@ -69,3 +70,20 @@ export const play_song_from_network = (song, onSuccess, onError, onPlaybackFinis
 
     return s;
 }
+
+export const forFade = ({ current, next }) => {
+    const opacity = Animated.interpolateNode(Animated.add(
+        current.progress,
+        next ? next.progress : 0
+    ), {
+        inputRange: [0, 1, 2],
+        outputRange: [0, 1, 0],
+    });
+
+    return {
+        leftButtonStyle: { opacity },
+        rightButtonStyle: { opacity },
+        titleStyle: { opacity },
+        backgroundStyle: { opacity },
+    };
+};

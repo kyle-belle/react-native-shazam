@@ -14,8 +14,9 @@ const LIBRARY_CARD_SPACING = 10;
 const LIBRARY_CARD_WIDTH = (width / 2) - (LIBRARY_CARD_SPACING * 2);
 const LIBRARY_CARD_HEIGHT = LIBRARY_CARD_WIDTH * 1.6;
 
+const CHART_LIST_PADDING = 12;
 const CHART_ENTRY_SPACING = 5;
-const CHART_ENTRY_SIZE = (width / 3) - (CHART_ENTRY_SPACING * 2);
+const CHART_ENTRY_SIZE = (width / 3) - (CHART_ENTRY_SPACING * 2) - (CHART_LIST_PADDING/2);
 
 const EQUALIZER_SIZE = 60;
 
@@ -30,7 +31,8 @@ export const Styles = StyleSheet.create({
         flex: 1,
         position: "relative"
     },
-    overlay: {
+    bottom_sheet_overlay: {
+        justifyContent: "flex-end",
         backgroundColor: "rgba(0,0,0,0.2)"
     },
     scroll_container: {
@@ -145,7 +147,7 @@ export const Styles = StyleSheet.create({
         color: "rgba(110, 85, 155, 1)",
     },
     chart_list_container: {
-        padding: 12,
+        padding: CHART_LIST_PADDING,
         paddingBottom: 25,
         backgroundColor: "white",
         marginBottom: 10

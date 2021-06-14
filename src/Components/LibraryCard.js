@@ -9,6 +9,8 @@ const LibraryCard = ({children=[], onPress}) => {
     const onPressLibraryCard = () => {
         if(typeof(onPress) === "function"){
             onPress();
+        }else{
+            console.log("LibraryCard Pressed");
         }
     }
 

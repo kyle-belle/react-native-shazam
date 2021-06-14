@@ -12,7 +12,7 @@ const ChartEntry = ({entry={}, index=1, onPress}) => {
 
     const onPressEntry = () => {
         if(typeof(onPress) === "function"){
-            onPress({...song, artwork, audio_src, accent_color})
+            onPress({...song, name: song_name, artwork, audio_src, accent_color})
         }
     }
 

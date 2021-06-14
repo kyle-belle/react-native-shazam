@@ -12,12 +12,13 @@ import Animated from 'react-native-reanimated';
 
 const {container} = Styles;
 
-const Song = ({song, loading_song, playing_song}) => {
-
+const Song = ({song, loading_song, playing_song, discover, global_opacity, translateY}) => {
     const {name:song_name="Song Name", audio_src, artist={}, accent_color="#00F0FF"} = song;
     const {name:artist_name="Artist Name"} = artist;
     const song_loading = loading_song?.audio_src === audio_src;
     const playing = playing_song?.audio_src === audio_src;
+
+    console.log("Discovered", discover);
 
     const onPressPlay = () => {
         play_song_from_network(song, (s, already_loaded) => {
@@ -33,15 +34,15 @@ const Song = ({song, loading_song, playing_song}) => {
     return (
         <View style={[container, {justifyContent: "flex-end", padding: 15}]}>
             <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start"}}>
-                <View>
+                <Animated.View style={{transform: [{translateY}]}}>
                     <Text numberOfLines={1} style={{color: "white", fontSize: 35, fontWeight: "bold"}}>{song_name}</Text>
-                    <Text style={{fontSize: 18, color: "rgba(180,180,180,1)", marginBottom: 25}}>{artist_name}</Text>
-                    <Text style={{fontSize: 11, color: "rgba(180,180,180,1)", marginBottom: 25}}><FontistoIcons name="shazam" color="grey" /> 1,129,283 Shazams</Text>
-                </View>
+                    <Animated.Text style={{fontSize: 18, color: "rgba(180,180,180,1)", marginBottom: 25, opacity: global_opacity}}>{artist_name}</Animated.Text>
+                    <Animated.Text style={{fontSize: 11, color: "rgba(180,180,180,1)", marginBottom: 25, opacity: global_opacity}}><FontistoIcons name="shazam" color="grey" /> 1,129,283 Shazams</Animated.Text>
+                </Animated.View>
 
-                <View>
+                <Animated.View style={{opacity: global_opacity}}>
                     <PlayButton backgroundColor={accent_color} size={70} song_loading={song_loading} playing={playing} onPress={onPressPlay} />
-                </View>
+                </Animated.View>
             </View>
         </View>
     );

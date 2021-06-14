@@ -21,7 +21,6 @@ const {container, library_label, library_card, library_card_save_text, library_c
 const Library = ({navigation, logged_in=false, set_song_for_details}) => {
 
     const onPressLibraryCard = (song) => {
-        console.log("Pressed LibraryCard");
         set_song_for_details(song);
         navigation.navigate("SongDetails", {song});
     }
@@ -71,7 +70,7 @@ const Library = ({navigation, logged_in=false, set_song_for_details}) => {
                         const {name:artist_name="Artist Name"} = artist;
 
                         return (
-                            <LibraryCard onPress={() => {onPressLibraryCard({...song, artwork, audio_src, accent_color})}} key={index.toString()}>
+                            <LibraryCard onPress={(index===0 && !logged_in)?null:() => {onPressLibraryCard({...song, name: song_name, artwork, audio_src, accent_color})}} key={index.toString()}>
                                 {(index===0 && !logged_in)?(
                                     <View style={[container, {justifyContent: "center", alignItems: "center"}]}>
                                         <IonIcons name="ios-cloud-done" size={library_card.width * 0.3} color="rgba(0, 150, 255,1)" />

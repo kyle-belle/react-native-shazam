@@ -1,4 +1,5 @@
-import { createStackNavigator } from '@react-navigation/stack';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
+import { forFade } from '../../Utils';
 import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import {createSharedElementStackNavigator} from "react-navigation-shared-element";

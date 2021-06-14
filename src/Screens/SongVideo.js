@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Styles } from '../Styles';
-import { View, Text, Alert, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, Alert, Dimensions } from 'react-native';
 import YoutubePlayer from "react-native-youtube-iframe";
 
 import {play_song_from_network} from '../Utils';
-import PlayButton from '../Components/PlayButton';
 
 const {width} = Dimensions.get('window');
 
