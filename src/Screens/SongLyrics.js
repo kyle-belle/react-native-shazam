@@ -1,14 +1,8 @@
 import React, {useRef, useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { Styles } from '../Styles';
-import {Animated, View, Text, Alert, TouchableOpacity, Dimensions, findNodeHandle } from 'react-native';
-import {useNavigationState} from "@react-navigation/native";
-import FontistoIcons from "react-native-vector-icons/Fontisto";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import IonIcons from "react-native-vector-icons/Ionicons";
+import {Animated, View, Text, TouchableOpacity, Dimensions } from 'react-native';
 
-import {play_song_from_network} from '../Utils';
-import PlayButton from '../Components/PlayButton';
 import { DEFAULT_SONG_SRC } from '../Dev-Data/songs';
 
 const {container} = Styles;
@@ -18,7 +12,6 @@ const {width} = Dimensions.get('window');
 let lyric_animations = null;
 
 const SongLyrics = ({song, loading_song, playing_song, navigation}) => {
-    const {history, routeNames, index, routes} = useNavigationState((state) => state);
     
     const song_lyrics = {song: DEFAULT_SONG_SRC, lyrics: [
         {start_time: 0, end_time: 1000, lyric_section: "These are the song lyrics"},
@@ -67,19 +60,7 @@ const SongLyrics = ({song, loading_song, playing_song, navigation}) => {
         })));
 
         lyric_animations?.start();
-    }, [lyricLayouts])
-
-
-    const onPressPlay = () => {
-        play_song_from_network(song, (s, already_loaded) => {
-            if(!already_loaded){console.log("played successfully")}
-        }, (error) => {
-            console.log(error);
-            Alert.alert("Audio Error", JSON.stringify(error) || error);
-        }, () => {
-            console.log("Playback Finished");
-        });
-    }
+    }, [lyricLayouts]);
 
     const max_lyric_height = Math.max(...lyricLayouts.map(({height}) => height));
 

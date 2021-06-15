@@ -16,6 +16,7 @@ import SongVideo from '../Screens/SongVideo';
 import SongArtist from '../Screens/SongArtist';
 import RelatedSongs from '../Screens/RelatedSongs';
 import { show_options_sheet } from '../Actions';
+import AnimatedLinearGradient from '../Components/AnimatedLinearGradient';
 
 const {width, height} = Dimensions.get("window");
 
@@ -54,7 +55,7 @@ const SongDetailsNavigator = ({song={}, playing_song=null, loading_song=null, sh
     const image_ref = useRef(null);
     const promotion_ref = useRef(null);
     const [, setState] = useState();
-    const [gradientColor, setGradientColor] = useState("rgba(0,0,0,0.1)");
+    const [gradientColor, setGradientColor] = useState(discover?"rgba(0,0,0,0.1)":"rgba(0,0,0,1)");
     const position = useRef(new Animated.Value(0)).current;
 
     const global_opacity = useRef(new Animated.Value(discover?0:1)).current;
@@ -76,9 +77,10 @@ const SongDetailsNavigator = ({song={}, playing_song=null, loading_song=null, sh
         Animated.timing(name_translateY, {
             toValue: 0,
             duration: 800,
-            easing: EasingNode.ease
+            easing: EasingNode.sin
         }).start(() => {
             setTimeout(() => {
+                setGradientColor("rgba(0,0,0,1)");
                 Animated.timing(global_opacity, {
                     toValue: 1,
                     duration: 800,
@@ -98,7 +100,7 @@ const SongDetailsNavigator = ({song={}, playing_song=null, loading_song=null, sh
             <Animated.View style={{width, height, position: "absolute", opacity: global_opacity}}>
                 <Animated.Image ref={image_ref} style={{width, height, position: "absolute", opacity: opacity.current}} source={{uri: artwork}} />
             </Animated.View>
-            <LinearGradient colors={["rgba(0,0,0,0.1)", "rgba(0,0,0,1)"]} locations={[0, 0.8]} style={container}>
+            <AnimatedLinearGradient colors={["rgba(0,0,0,0.1)", gradientColor]} locations={[0, 0.8]} duration={500} style={container}>
                 
                 <Tab.Navigator position={position} backBehavior="initialRoute" sceneContainerStyle={{backgroundColor: "transparent", overflow: "visible"}} style={{overflow: "visible"}} lazy lazyPreloadDistance={1} initialLayout={{width, height}} initialRouteName="Song" tabBar={(props) => {
                     const {position, state} = props;
@@ -157,7 +159,7 @@ const SongDetailsNavigator = ({song={}, playing_song=null, loading_song=null, sh
                 </Animated.View>
 
                 <EqualizerButton playing={!!playing_song} loading_song={loading_song} onPress={onPressEqualizer} />
-            </LinearGradient>
+            </AnimatedLinearGradient>
         </View>
     );
 }
