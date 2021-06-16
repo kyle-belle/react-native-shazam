@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import {Animated} from "react-native"
 import LinearGradient from "react-native-linear-gradient";
-// import Animated from 'react-native-reanimated';
+// import Animated from 'react-native-reanimated'; // Animated value props not being passed down when using reanimated
 
 class GradientInterpolator extends Component {
 
     getColors(){
         // console.log(this.props);
-        return Object.keys(this.props).filter((key) => (/(color[0-9]{1,})/i).test(key)).map(key => {
-            const c = this.props[key];
-            delete this.props[key];
-            return c;
-        });
+        return Object.keys(this.props).filter((key) => (/(color[0-9]{1,})/i).test(key)).map(key => this.props[key]);
     }
 
     render(){

@@ -20,6 +20,7 @@ import HomeNav from "./src/Navigators/HomeNavigator";
 import SongDetailsNavigator from './src/Navigators/SongDetailsNavigator';
 import BottomSheet from './src/Components/BottomSheet';
 import SongOptions from './src/Components/SongOptions';
+import SongPlayer from './src/Screens/SongPlayer';
 
 console.log("Pixel Ratio", PixelRatio.get());
 
@@ -36,6 +37,7 @@ const App = () => {
           <Stack.Navigator screenOptions={{cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS}} initialRouteName="Home" headerMode="none">
             <Stack.Screen name="Home" component={HomeNav} />
             <Stack.Screen name="SongDetails" component={SongDetailsNavigator} />
+            <Stack.Screen name="SongPlayer" component={SongPlayer} options={{cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS}} />
           </Stack.Navigator>
           <StatusBar barStyle="light-content" translucent backgroundColor="rgba(0,0,0,0.2)" />
           <BottomSheet>

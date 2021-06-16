@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import { Animated, View, TouchableHighlight } from 'react-native';
+
 import { Styles } from '../Styles';
 
 const {equalizer_overlay, equalizer_line} = Styles;
@@ -21,7 +22,6 @@ const equalizer_show_animation = Animated.timing(equalizer_scale, {toValue: 1, d
 const equalizer_hide_animation = Animated.timing(equalizer_scale, {toValue: 0, duration: 200, useNativeDriver: true});
 
 const EqualizerButton = ({playing=false, loading_song=null, onPress}) => {
-    
     const show_equalizer = () => {
         equalizer_show_animation.start();
     }

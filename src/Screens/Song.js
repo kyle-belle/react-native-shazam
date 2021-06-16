@@ -18,7 +18,7 @@ const Song = ({song, loading_song, playing_song, discover, global_opacity, trans
     const song_loading = loading_song?.audio_src === audio_src;
     const playing = playing_song?.audio_src === audio_src;
 
-    console.log("Discovered", discover);
+    // console.log("Discovered", discover);
 
     const onPressPlay = () => {
         play_song_from_network(song, (s, already_loaded) => {

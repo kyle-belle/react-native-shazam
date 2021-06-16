@@ -65,7 +65,7 @@ const Listening = ({navigation, set_listening, set_song_for_details}) => {
 
         const song = {name: "Song Name", artist: {}, album: {}, featuring: [], artwork: "https://cdn.dribbble.com/users/2113371/screenshots/6521709/drake_final_2x.jpg", audio_src: DEFAULT_SONG_SRC, accent_color: "#00A0FF"}
 
-        setTimeout(() => {set_listening(false); set_song_for_details(song); Vibration.vibrate([0, 500, 100, 300]); navigation.navigate("Main"); navigation.navigate("SongDetails", {discover: true});}, 3000);
+        setTimeout(() => {set_listening(false); set_song_for_details(song); Vibration.vibrate([0, 500, 100, 300]); navigation.navigate("Main"); navigation.navigate("SongDetails", {discover: true});}, 8000);
 
         return () => {circle_animations.stop(); big_circle_animations.stop(); big_circle_animations.reset(); circle_animations.reset(); reset_animation_values();}
     }, [])

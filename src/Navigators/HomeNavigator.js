@@ -17,12 +17,10 @@ const {container} = Styles;
 
 const Tab = createMaterialTopTabNavigator();
 
-const HomeNavigator = ({listening, playing_song=null, loading_song=null}) => {
-
-    // console.log("listening", listening);
+const HomeNavigator = ({listening, playing_song=null, loading_song=null, navigation}) => {
 
     const onPressEqualizer = () => {
-        console.log("Equalizer Pressed");
+        navigation.navigate("SongPlayer");
     }
 
     return (
@@ -33,7 +31,7 @@ const HomeNavigator = ({listening, playing_song=null, loading_song=null}) => {
                 <Tab.Screen name="Charts" component={Charts} />
             </Tab.Navigator>
 
-            <EqualizerButton playing={!!playing_song} loading_song={loading_song} />
+            <EqualizerButton playing={!!playing_song} loading_song={loading_song} onPress={onPressEqualizer} />
         </View>
     );
 }

@@ -17,6 +17,7 @@ import SongArtist from '../Screens/SongArtist';
 import RelatedSongs from '../Screens/RelatedSongs';
 import { show_options_sheet } from '../Actions';
 import AnimatedLinearGradient from '../Components/AnimatedLinearGradient';
+import AppleMusicPromo from '../Components/AppleMusicPromo';
 
 const {width, height} = Dimensions.get("window");
 
@@ -45,7 +46,7 @@ const MemoizedRelatedSongs = memo(RelatedSongs);
 //     };
 // }
 
-const SongDetailsNavigator = ({song={}, playing_song=null, loading_song=null, show_options_sheet, route}) => {
+const SongDetailsNavigator = ({song={}, playing_song=null, loading_song=null, show_options_sheet, navigation, route}) => {
     const {accent_color} = song;
 
     const {discover=false} = route.params;
@@ -66,11 +67,7 @@ const SongDetailsNavigator = ({song={}, playing_song=null, loading_song=null, sh
     const {artwork=""} = song;
 
     const onPressEqualizer = () => {
-        console.log("Equalizer Pressed");
-    }
-
-    const onPressOptions = () => {
-        show_options_sheet(song);
+        navigation.navigate("SongPlayer");
     }
 
     useEffect(() => {
@@ -140,23 +137,7 @@ const SongDetailsNavigator = ({song={}, playing_song=null, loading_song=null, sh
                     </Tab.Screen>
                 </Tab.Navigator>
 
-                <Animated.View ref={promotion_ref} style={{transform: [{translateX: left.current}], bottom: 0, width, marginBottom: 20, opacity: global_opacity}}>
-                    <View style={{flexDirection: "row", alignSelf: "center", alignItems: "center", marginBottom: 20}}>
-                        <TouchableOpacity>
-                            <View style={{flexDirection: "row", alignItems: "center", backgroundColor: "rgba(200,200,200,0.3)", paddingVertical: 8, paddingHorizontal: 12, borderRadius: 40}}>
-                                <View style={{backgroundColor: "rgba(255, 50, 50, 1)", width: 30, height: 30, borderRadius: 30, justifyContent: "center", alignItems: "center", marginRight: 10}}><MaterialCommunityIcons name="music" color="white" size={20} /></View>
-                                <Text style={{color: "white", fontSize: 14, fontWeight: "bold"}}>PLAY FULL SONG</Text>
-                            </View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={onPressOptions}>
-                            <View style={{width: 46, height: 46, borderRadius: 46, justifyContent: "center", alignItems: "center", backgroundColor: "rgba(200,200,200,0.3)", marginLeft: 10}}>
-                                <IonIcons name="ellipsis-vertical" color="white" size={20} />
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <Text style={{color: "white", textAlign: "center", fontWeight: "700", fontSize: 14}}>Get up to 3 months free of Apple Music</Text>
-                </Animated.View>
+                <AppleMusicPromo promotion_ref={promotion_ref} global_opacity={global_opacity} translateX={left} song={song} />
 
                 <EqualizerButton playing={!!playing_song} loading_song={loading_song} onPress={onPressEqualizer} />
             </AnimatedLinearGradient>
