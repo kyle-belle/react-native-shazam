@@ -87,7 +87,7 @@ const SongPlayer = ({playing_song={}, loading_song, navigation, show_options_she
         }
     }
 
-    const progress_bar_pan_responder = useRef(PanResponder.create({
+    const progress_bar_pan_responder = useMemo(() => PanResponder.create({
         onStartShouldSetPanResponder: (e, {x0, moveX}) => true,
         onMoveShouldSetPanResponder: () => false,
 
@@ -112,7 +112,7 @@ const SongPlayer = ({playing_song={}, loading_song, navigation, show_options_she
             is_seeking = false;
             progress_animation_handle = requestAnimationFrame(progress);
         }
-    })).current;
+    }), [song]);
 
     const pan_responder = useRef(PanResponder.create({
         onStartShouldSetPanResponder: () => true,
