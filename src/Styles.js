@@ -26,6 +26,9 @@ const SONG_DETAIL_TAB_INDICATOR_BORDER_RADIUS = 20;
 
 const SONG_ARTIST_IAMGE_SIZE = 100;
 
+const SONG_PLAYER_HEADER_MARGIN_TOP = StatusBar.currentHeight + 20;
+const SONG_PLAYER_HEADER_MARGIN_BOTTOM = 15;
+
 export const Styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -290,5 +293,20 @@ export const Styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold",
         marginBottom: 20
+    },
+    song_player_header_container: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: SONG_PLAYER_HEADER_MARGIN_TOP,
+        marginBottom: SONG_PLAYER_HEADER_MARGIN_BOTTOM,
+        paddingHorizontal: 25
+    },
+    song_player_list_header: {
+        marginTop: 20,
+        paddingHorizontal: 20,
+        paddingBottom: 10,
+        flexDirection: "row",
+        borderBottomColor: "rgba(200,200,200,0.3)",
+        borderBottomWidth: 0.5
     }
 });
